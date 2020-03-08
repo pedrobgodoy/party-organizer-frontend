@@ -10,7 +10,7 @@ function UserLoginForm(){
 	const [redirect, setRedirect] = useState("");
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-	const [cookies, setCookie] = useCookies(['authToken']);
+	const [, setCookie] = useCookies(['authToken']);
 
 	if(redirect !== ""){
 		return (
@@ -39,7 +39,6 @@ function UserLoginForm(){
 		if(response.data.status === "error"){
 			console.log(response.data.message);
 		}else{
-			console.log(cookies.authToken);
 			setCookie('authToken', response.data.token, { path: '/' });
 			setRedirect('/main-panel');
 		}

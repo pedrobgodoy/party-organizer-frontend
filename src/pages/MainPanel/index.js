@@ -1,40 +1,31 @@
-import React, {useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useCookies } from "react-cookie";
-import {addEvent} from "../../store/actions/EventActions";
-
-import api from '../../services/api';
+import { getEvents } from "../../store/actions/EventActions";
 
 import MainForm from '../../components/MainPanel/MainForm';
 import EventCard from '../../components/MainPanel/EventCard';
 
 function MainPanel(){
     const events = useSelector(state=>state.events)
+    const error = useSelector(state=>state.error);
     const [cookies] = useCookies(['authToken']);
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        async function fetchData(_authToken){
-            const response = await api.get('evento', {
-                headers: { Authorization: `Bearer ${_authToken}` }
-            })
-    
-            if(response.data.status === "error"){
-                console.error(response.data.message)
-            }
-            if(response.data.status === "success"){
-                response.data.events.forEach(event => dispatch(addEvent(event)));
-            }
-        }
+    useEffect(()=>{
+        if(error)
+            console.error(error);
+    }, [error]);
 
-        fetchData(cookies.authToken);
-    }, [cookies.authToken]);
+    useEffect(() => {
+        dispatch(getEvents(cookies.authToken));
+    }, [cookies.authToken, dispatch]);
 
     return (
         <div>
             <MainForm />
-            {events.map(event=><EventCard key={event.name} event={event}/>)}
+            {events ? events.map(event=><EventCard key={event.name} event={event}/>) : <div>Nenhum evento encontrado!</div>}
         </div>
     )
 }

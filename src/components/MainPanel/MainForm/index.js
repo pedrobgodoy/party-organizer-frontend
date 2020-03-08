@@ -3,19 +3,19 @@ import { Redirect } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 
-import { addEvent } from "../../../store/actions/EventActions";
+import { postEvent, clearEvents } from "../../../store/actions/EventActions";
 
 import './styles.css';
 
 function MainForm(){
     const [redirect, setRedirect] = useState("");
-    const [,, removeCookie] = useCookies (['authToken']);
+    const [cookies,, removeCookie] = useCookies (['authToken']);
     
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [duration, setDuration] = useState(0);
 
-    const dispath = useDispatch();
+    const dispatch = useDispatch();
 
 	if(redirect !== ""){
 		return (
@@ -24,6 +24,8 @@ function MainForm(){
 	}
 
     function handleLogout(){
+        dispatch(clearEvents());
+
         removeCookie("authToken", {path: "/"});
         setRedirect("/login");
     }
@@ -31,12 +33,9 @@ function MainForm(){
     function handleAddEvent(e){
         e.preventDefault();
 
-        const newDate = new Date();
-        const formatedDate = newDate.getDay() + '/' + (newDate.getMonth() + 1) + '/' + newDate.getFullYear();
-        
-        const newEvent = {name, description, formatedDate, duration};
+        const newEvent = {name, description, date: Date.now(), duration};
 
-        dispath(addEvent(newEvent));
+        dispatch(postEvent(newEvent, cookies.authToken));
     }
 
     return(
