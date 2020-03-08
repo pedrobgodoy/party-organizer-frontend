@@ -29,7 +29,7 @@ function UserRegisterForm(){
 			console.log("É necessário ter uma senha para continuar!");
 		}
 
-		if(password != passwordConfirmation){
+		if(password !== passwordConfirmation){
 			console.log("As senhas devem estar iguais!");
 		}
 

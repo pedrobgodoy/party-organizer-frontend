@@ -1,0 +1,38 @@
+.main-panel{
+    background: #FFF; 
+    width: 1200px;
+    padding: 30px;
+    margin-top: 50px;
+    
+    -webkit-box-shadow: 5px 5px 8px 0px rgba(176,176,176,1);
+    -moz-box-shadow: 5px 5px 8px 0px rgba(176,176,176,1);
+    box-shadow: 5px 5px 8px 0px rgba(176,176,176,1);
+}
+
+.main-panel .input-block{
+    width: 100%
+}
+
+.main-panel .input-block input{
+    width: 100%;
+    margin: 10px 0;
+}
+
+.main-panel button{
+    width: 100%;
+    border: 0;
+    background: #fc6963;
+    border-radius: 2px;
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 20px;
+
+    transition: background .2s;
+}
+
+.main-panel button:hover{
+    background: #d15752;
+}

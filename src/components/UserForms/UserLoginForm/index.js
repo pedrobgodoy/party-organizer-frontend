@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Redirect} from 'react-router-dom';
+import {useCookies} from 'react-cookie';
 
 import api from '../../../services/api';
 
@@ -9,6 +10,7 @@ function UserLoginForm(){
 	const [redirect, setRedirect] = useState("");
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
+	const [cookies, setCookie] = useCookies(['authToken']);
 
 	if(redirect !== ""){
 		return (
@@ -37,7 +39,9 @@ function UserLoginForm(){
 		if(response.data.status === "error"){
 			console.log(response.data.message);
 		}else{
-			setRedirect('/logado');
+			console.log(cookies.authToken);
+			setCookie('authToken', response.data.token, { path: '/' });
+			setRedirect('/main-panel');
 		}
 	}
 
