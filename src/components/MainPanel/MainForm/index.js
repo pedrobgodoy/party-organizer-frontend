@@ -39,7 +39,7 @@ function MainForm(){
     }
 
     return(
-        <div className="main-panel">
+        <div className="aside box-shadow">
             <div className="input-group">
                 <div className="input-block">
                     <label htmlFor="Nome Evento">Nome Evento</label>

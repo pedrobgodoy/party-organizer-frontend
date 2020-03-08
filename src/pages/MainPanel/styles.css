@@ -1,0 +1,11 @@
+.main-panel-container{
+    max-width: 1500px;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    margin: 50px auto;
+}
+
+.events-container{
+    flex: 1;
+}

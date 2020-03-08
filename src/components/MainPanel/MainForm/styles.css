@@ -1,24 +1,17 @@
-.main-panel{
-    background: #FFF; 
-    width: 1200px;
+.aside{
     padding: 30px;
-    margin-top: 50px;
-    
-    -webkit-box-shadow: 5px 5px 8px 0px rgba(176,176,176,1);
-    -moz-box-shadow: 5px 5px 8px 0px rgba(176,176,176,1);
-    box-shadow: 5px 5px 8px 0px rgba(176,176,176,1);
 }
 
-.main-panel .input-block{
+.aside .input-block{
     width: 100%
 }
 
-.main-panel .input-block input{
+.aside .input-block input{
     width: 100%;
     margin: 10px 0;
 }
 
-.main-panel button{
+.aside button{
     width: 100%;
     border: 0;
     background: #fc6963;
@@ -33,6 +26,6 @@
     transition: background .2s;
 }
 
-.main-panel button:hover{
+.aside button:hover{
     background: #d15752;
 }
