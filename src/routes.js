@@ -1,6 +1,9 @@
 import React from "react";
 import {BrowserRouter, Route, Switch, Redirect} from "react-router-dom";
 import {CookiesProvider } from 'react-cookie';
+import {Provider} from 'react-redux';
+
+import Store from './store';
 
 import './global.css';
 import './App.css';
@@ -14,17 +17,19 @@ import MainPanel from './pages/MainPanel';
 function Routes(){
 	return(
 		<div id="app">
-			<CookiesProvider >
-				<BrowserRouter>
-					<Switch>
-						<Route exact path="/" ><Redirect to="/login" /></Route>
-						<Route path="/login" component={() => <UserLogin />} />
-						<Route path="/signup" component={() => <UserRegister />} />
-						<PrivateRoute path="/main-panel" component={() => <MainPanel />} />
-						<Route path="*" component={() => <h1>Página não encontrada!</h1>} />
-					</Switch>
-				</BrowserRouter>
-			</CookiesProvider >
+			<Provider store={Store}>
+				<CookiesProvider >
+					<BrowserRouter>
+						<Switch>
+							<Route exact path="/" ><Redirect to="/login" /></Route>
+							<Route path="/login" component={() => <UserLogin />} />
+							<Route path="/signup" component={() => <UserRegister />} />
+							<PrivateRoute path="/main-panel" component={() => <MainPanel />} />
+							<Route path="*" component={() => <h1>Página não encontrada!</h1>} />
+						</Switch>
+					</BrowserRouter>
+				</CookiesProvider >
+			</Provider>
 		</div>
 	)
 }

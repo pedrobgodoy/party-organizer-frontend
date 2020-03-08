@@ -1,16 +1,21 @@
 import React, {useState} from 'react';
-import {Redirect} from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { useDispatch } from "react-redux";
+
+import { addEvent } from "../../../store/actions/EventActions";
 
 import './styles.css';
 
 function MainForm(){
     const [redirect, setRedirect] = useState("");
     const [,, removeCookie] = useCookies (['authToken']);
-    const [events, setEvents] = useState([]);
+    
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [duration, setDuration] = useState(0);
+
+    const dispath = useDispatch();
 
 	if(redirect !== ""){
 		return (
@@ -30,12 +35,8 @@ function MainForm(){
         const formatedDate = newDate.getDay() + '/' + (newDate.getMonth() + 1) + '/' + newDate.getFullYear();
         
         const newEvent = {name, description, formatedDate, duration};
-        
-        const newEventList = [...events, newEvent];
 
-        setEvents(newEventList);
-
-        console.log(newEventList);
+        dispath(addEvent(newEvent));
     }
 
     return(
